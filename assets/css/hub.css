@@ -1,0 +1,22 @@
+
+@font-face {
+  font-family: "Codec Pro";
+  src: url("../fontes/Codec Pro Regular.ttf") format("truetype");
+  font-display: swap;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cor-texto); color: var(--cor-branco); font-family: "Codec Pro", Arial, sans-serif; }
+.barra-hub { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 6%; background: var(--cor-branco); color: var(--cor-texto); }
+.barra-hub img { display: block; width: var(--tamanho-logo-menu); height: var(--tamanho-logo-menu); }
+.barra-hub a { color: inherit; font-size: 18px; text-decoration: none; }
+.barra-hub a:hover { text-decoration: underline; }
+a:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 5px; }
+.apresentacao-hub { position: relative; display: grid; place-content: center; min-height: calc(100svh - var(--altura-menu)); padding: 80px 24px 50px; background: linear-gradient(#0009, #000b), url("../imagens/masterhub-fundo.jpg") center / cover no-repeat; text-align: center; }
+.botao-prime { position: absolute; top: 20px; right: 24px; display: inline-block; padding: var(--espaco-botao-vertical) var(--espaco-botao-horizontal); border-radius: var(--borda-botao-pagina); background: var(--cor-preto); color: var(--cor-branco); font-size: var(--fonte-botao-pagina); font-weight: bold; line-height: 1; text-decoration: none; white-space: nowrap; }
+.botao-prime span { color: var(--cor-destaque); }
+.botao-prime:hover { background: var(--cor-hover); }
+@media (max-width: 600px) {
+  .botao-prime { right: 16px; }
+}
+h1 { margin: 0; font-size: var(--fonte-titulo-hub); font-weight: 400; }
+h1 span { color: var(--cor-destaque); }
