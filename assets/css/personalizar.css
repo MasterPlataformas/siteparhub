@@ -1,0 +1,69 @@
+/* Aqui eu ajusto o visual das duas páginas
+   Tamanhos usam px Nas cores, posso colocar um código como #111111
+   Para deixar a logo mais forte, aumento a opacidade (de 0 a 1) */
+:root {
+  /* Cores que mais uso no site */
+  --cor-texto: #111;
+  --cor-branco: #fff;
+  --cor-pagina: #f5f5f5;
+  --cor-preto: #000;
+  --cor-destaque: #f5cc42;
+  --cor-foco: #b89a59;
+  --cor-hover: #333;
+  --cor-degrade: #f4f4f4;
+
+  /* Barra de cima */
+  --fonte-menu: 22px;
+  --fonte-menu-celular: 18px;
+  --altura-menu: 84px;
+  --tamanho-logo-menu: 44px;
+
+  /* Tamanho das fotos, mexer aqui se ficar grande pra caralho */
+  --largura-equipe: 1080px;
+  --altura-carrossel: 520px;
+  --largura-foto: 420px;
+  --altura-foto: 510px;
+  --deslocamento-foto-anterior: -145px;
+  --desfoque-foto-anterior: 3px;
+  --opacidade-foto-anterior: .35;
+  --fonte-nome: clamp(28px, 3.5vw, 44px);
+  --fonte-descricao: clamp(20px, 2.5vw, 28px);
+
+  /* Logo grande e apagada no fundo */
+  --tamanho-logo-fundo: 490px;
+  --desfoque-logo-fundo: 5px;
+  --opacidade-logo-fundo: .15;
+
+  /* Botões entre Prime e HUB */
+  --fonte-botao-pagina: 16px;
+  --espaco-botao-vertical: 6px;
+  --espaco-botao-horizontal: 22px;
+  --borda-botao-pagina: 999px;
+
+  /* Vídeos e título principal */
+  --altura-video: clamp(350px, 55vw, 540px);
+  --altura-video-apresentacao: 420px;
+  --fonte-titulo-prime: clamp(52px, 7.5vw, 88px);
+  --fonte-titulo-hub: clamp(48px, 10vw, 110px);
+}
+
+/* No tablet, só as fotos precisam ficar menores */
+@media (max-width: 900px) {
+  :root {
+    --altura-carrossel: 430px;
+    --largura-foto: 330px;
+    --altura-foto: 420px;
+  }
+}
+
+/* Esse celular quebra a porra toda, os tamanhos menores ficam aqui */
+@media (max-width: 600px) {
+  :root {
+    --fonte-menu: var(--fonte-menu-celular);
+    --altura-carrossel: 380px;
+    --largura-foto: 290px;
+    --altura-foto: 370px;
+    --deslocamento-foto-anterior: -75px;
+    --tamanho-logo-fundo: 360px;
+  }
+}

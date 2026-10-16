@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Prime & MasterHub</title>
+  <style>
+    @font-face {
+      font-family: "Codec Pro";
+      src: url("../assets/fontes/Codec Pro Regular.ttf") format("truetype");
+      font-display: swap;
+    }
+
+    /* CORES DO SITE: altere aqui para mudar a identidade visual */
+    :root {
+      --amarelo: #f5cc42;
+      --dourado: #b89a59;
+      --fundo: #17191f;
+      --fundo-card: #24272d;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f5; color: #111; font-family: "Codec Pro", Arial, sans-serif; }
+    button { font: inherit; }
+
+    /* CABEÇALHO */
+    .cabecalho {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      min-height: 215px;
+      padding: 25px 3%;
+      background: #fff;
+    }
+    .cabecalho::before {
+      content: "";
+      position: absolute;
+      inset: -15px;
+      z-index: -1;
+      background: linear-gradient(#0007, #0007), url("../assets/imagens/masterhub-fundo.jpg") center/cover no-repeat;
+      filter: blur(9px);
+      opacity: 0;
+      transition: opacity .45s ease;
+    }
+    .cabecalho.modo-hub::before { opacity: 1; }
+
+    .seletor {
+      position: relative;
+      display: flex;
+      width: min(100%, 690px);
+      flex-shrink: 1;
+      min-width: 0;
+      padding: 7px;
+      border-radius: 999px;
+      background: #000;
+    }
+    .seletor::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      bottom: 7px;
+      left: 7px;
+      width: calc((100% - 14px) / 2);
+      background: #fff;
+      border-radius: 999px;
+      transition: transform .4s ease;
+    }
+    .seletor[data-site="hub"]::before { transform: translateX(100%); }
+    .seletor button {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 0;
+      padding: 21px 8px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      font-size: clamp(16px, 1.8vw, 27px);
+      white-space: nowrap;
+      transition: color .35s ease;
+    }
+    .seletor button[aria-selected="true"] { color: #000; }
+    .hub-amarelo { color: var(--amarelo); }
+    .titulo-marca {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 70px);
+      font-weight: 400;
+      line-height: 1.05;
+      white-space: nowrap;
+      color: #000;
+    }
+    .cabecalho.modo-hub .titulo-marca { color: #fff; }
+
+    /* CONTEÚDO DAS PÁGINAS */
+    .pagina { display: none; animation: entrada .4s ease both; }
+    .pagina.ativa { display: block; }
+    .pagina[hidden] { display: none !important; }
+    @keyframes entrada { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      height: clamp(350px, 55vw, 540px);
+      background: #151515;
+      color: #fff;
+      text-align: center;
+    }
+    .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: #0009; backdrop-filter: blur(3px); }
+    .hero h2 { position: relative; z-index: 1; padding: 20px; font-size: clamp(28px, 5vw, 54px); }
+
+    /* SEÇÃO DOS CONSULTORES */
+    .consultores {
+      overflow: hidden;
+      padding: 55px 20px 65px;
+      background: var(--fundo);
+      color: #fff;
+    }
+    .consultores h3 {
+      margin: 0 0 35px;
+      text-align: center;
+      font-size: clamp(25px, 4vw, 38px);
+    }
+
+    /* A descrição fica à ESQUERDA e as fotos à DIREITA */
+    .area-consultores {
+      display: grid;
+      grid-template-columns: 80% 45%;
+      align-items: left;
+      gap: 20px;
+      max-width: 1550px;
+      margin: auto;
+    }
+
+    /* CARD DE INFORMAÇÕES: tamanho, borda e fundo */
+    .card-consultor {
+      min-height: 310px;
+      padding: 30px;
+      background: var(--fundo-card);
+      border: 1px solid var(--dourado);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px #0004;
+      text-align: bottom;
+    }
+    .card-etiqueta {
+      display: block;
+      margin-bottom: 15px;
+      color: var(--dourado);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .card-consultor h4 {
+      margin: 0 0 8px;
+      color: var(--amarelo);
+      font-size: 28px;
+    }
+    .card-cargo { margin: 0 0 25px; color: #fff; font-size: 16px; }
+    .card-descricao { margin: 0 0 32px; color: #ddd; font-size: 35px; line-height: 1.6; }
+    .card-whatsapp {
+      display: inline-block;
+      padding: 25px 45px;
+      border-radius: 28px;
+      background: var(--amarelo);
+      color: #17191f;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background .2s ease;
+    }
+    .card-whatsapp:hover { background: #fff; }
+    .card-whatsapp[hidden] { display: none; }
+
+    /* CARROSSEL: continua mostrando anterior, atual e próximo */
+    .painel-carrossel { min-width: 0; }
+    .carrossel {
+      position: relative;
+      height: 390px;
+      width: 100%;
+      margin: auto;
+      perspective: 1100px;
+    }
+    .consultor {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 270px;
+      height: 355px;
+      margin-left: -135px;
+      padding: 0;
+      border: 0;
+      border-radius: 17px;
+      overflow: hidden;
+      background: #34383f;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateX(0) scale(.55);
+      transition: transform .5s ease, opacity .5s ease, filter .5s ease, visibility .5s;
+      box-shadow: 0 12px 28px #0005;
+    }
+    .consultor img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .consultor.ativo {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 3;
+      outline: 2px solid var(--dourado);
+      filter: none;
+    }
+    .consultor.esquerda {
+      transform: translateX(-205px) scale(.76) rotateY(15deg);
+      opacity: .55;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 2;
+      filter: grayscale(40%) blur(2px);
+    }
+    .consultor.direita {
+      transform: translateX(205px) scale(.76) rotateY(-15deg);
+      opacity: .55;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 2;
+      filter: grayscale(40%) blur(2px);
+    }
+    .controles { display: flex; justify-content: center; align-items: center; gap: 22px; }
+    .seta {
+      width: 45px;
+      height: 45px;
+      border: 1px solid var(--dourado);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--dourado);
+      font-size: 25px;
+      cursor: pointer;
+    }
+    .seta:hover { background: var(--dourado); color: var(--fundo); }
+    .indicador { color: #ddd; font-size: 14px; min-width: 42px; text-align: center; }
+    footer { padding: 25px 15px; background: #111; color: #fff; text-align: right; }
+
+    /* TELAS MENORES: card passa para baixo das fotos */
+    @media (max-width: 1000px) {
+      .area-consultores { grid-template-columns: 1fr; gap: 15px; }
+      .painel-carrossel { grid-row: 1; }
+      .card-consultor { grid-row: 2; width: min(100%, 650px); min-height: 0; margin: 15px auto 0; }
+      .cabecalho { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .cabecalho { min-height: 0; padding: 24px 12px; }
+      .seletor button { padding: 16px 4px; font-size: clamp(12px, 3.7vw, 19px); }
+      .titulo-marca { font-size: clamp(32px, 9vw, 56px); }
+      .consultores { padding: 40px 12px 50px; }
+      .carrossel { height: 315px; }
+      .consultor { width: 205px; height: 285px; margin-left: -102.5px; }
+      .consultor.esquerda { transform: translateX(-140px) scale(.68); }
+      .consultor.direita { transform: translateX(140px) scale(.68); }
+      .card-consultor { padding: 24px 20px; }
+      .card-consultor h4 { font-size: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="cabecalho" id="cabecalho">
+    <div class="seletor" id="seletor" data-site="prime" role="tablist" aria-label="Selecionar site">
+      <button type="button" id="tab-prime" role="tab" aria-controls="Master" aria-selected="true" onclick="trocarSite('prime')">MASTER PRIME</button>
+      <button type="button" id="tab-hub" role="tab" aria-controls="HUB" aria-selected="false" onclick="trocarSite('hub')">MASTER <span class="hub-amarelo">HUB</span></button>
+    </div>
+    <h1 class="titulo-marca" id="titulo-marca">MASTER PRIME</h1>
+  </header>
+
+  <main id="Master" class="pagina ativa" role="tabpanel" aria-labelledby="tab-prime">
+    <section class="hero">
+      <video autoplay muted loop playsinline aria-hidden="true"><source src="masterprime.mp4" type="video/mp4"></video>
+      <h2>Inserir título aqui</h2>
+    </section>
+
+    <section class="consultores">
+      <h3>Conheça nossos consultores</h3>
+
+      <div class="area-consultores">
+        <!-- CARD À ESQUERDA DAS FOTOS -->
+        <div class="card-consultor" aria-live="polite">
+          <span class="card-etiqueta">Equipe Master Prime</span>
+          <h4 id="nomeConsultor"></h4>
+          <p class="card-cargo" id="cargoConsultor"></p>
+          <p class="card-descricao" id="textoConsultor"></p>
+          <a class="card-whatsapp" id="whatsappConsultor" target="_blank" rel="noopener noreferrer" hidden>Falar com o consultor</a>
+        </div>
+
+        <div class="painel-carrossel">
+          <div class="carrossel" id="carrossel" aria-label="Carrossel de consultores">
+            <!-- EDITE AQUI: foto, nome, cargo, descrição e WhatsApp de cada pessoa.
+                 Número de WhatsApp: 55 + DDD + número, sem espaços.
+                 Se deixar data-whatsapp vazio, o botão não aparece. -->
+            <button type="button" class="consultor ativo" data-nome="Consultor 1" data-cargo="Especialista em Consórcios" data-descricao="Esse consultor é top 1." data-whatsapp="11-947171046"><img src="../assets/imagens/originais/29b490ca-8cd5-41cc-9268-5b6f0c3bd45d.jpg" alt="Consultor 1"></button>
+            <button type="button" class="consultor" data-nome="Consultor 2" data-cargo="Especialista em consorcio" data-whatsapp=""><img src="../assets/imagens/originais/594710e9-affb-45c7-8ea2-7af5ea9f288e.jpg" alt="Consultor 2"></button>
+            <button type="button" class="consultor" data-nome="Consultor 3" data-cargo="Especialista em Consórcios" data-descricao="Esse consultor é top 1." data-whatsapp=""><img src="../assets/imagens/originais/7790b843-f761-4734-9fe1-c2f790282eb9.jpg" alt="Consultor 3"></button>
+            <button type="button" class="consultor" data-nome="Consultor 4" data-cargo="Especialista em Consórcios" data-descricao="sse consultor é top 1." data-whatsapp=""><img src="consultor4.jpg" alt="Consultor 4"></button>
+            <button type="button" class="consultor" data-nome="Consultor 5" data-cargo="Especialista em Consórcios" data-descricao="sse consultor é top 1." data-whatsapp=""><img src="consultor5.jpg" alt="Consultor 5"></button>
+            <button type="button" class="consultor" data-nome="Consultor 6" data-cargo="Especialista em Consórcios" data-descricao="Escreva aqui a descrição do sexto consultor." data-whatsapp=""><img src="consultor6.jpg" alt="Consultor 6"></button>
+            <button type="button" class="consultor" data-nome="Consultor 7" data-cargo="Especialista em Consórcios" data-descricao="Escreva aqui a descrição do sétimo consultor." data-whatsapp=""><img src="consultor7.jpg" alt="Consultor 7"></button>
+            <button type="button" class="consultor" data-nome="Consultor 8" data-cargo="Especialista em Consórcios" data-descricao="Escreva aqui a descrição do oitavo consultor." data-whatsapp=""><img src="consultor8.jpg" alt="Consultor 8"></button>
+            <button type="button" class="consultor" data-nome="Consultor 9" data-cargo="Especialista em Consórcios" data-descricao="Escreva aqui a descrição do nono consultor." data-whatsapp=""><img src="consultor9.jpg" alt="Consultor 9"></button>
+          </div>
+          <div class="controles">
+            <button type="button" class="seta" onclick="mudarConsultor(-1)" aria-label="Consultor anterior">&#10094;</button>
+            <span class="indicador" id="indicador">1 / 9</span>
+            <button type="button" class="seta" onclick="mudarConsultor(1)" aria-label="Próximo consultor">&#10095;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="HUB" class="pagina" role="tabpanel" aria-labelledby="tab-hub" hidden>
+    <div class="hero hero-hub"><h2>Inserir título aqui</h2></div>
+  </section>
+  <footer>MASTER PRIME & MASTERHUB</footer>
+
+  <script>
+    function trocarSite(site) {
+      const prime = site === "prime";
+      document.getElementById("seletor").dataset.site = site;
+      document.getElementById("tab-prime").setAttribute("aria-selected", String(prime));
+      document.getElementById("tab-hub").setAttribute("aria-selected", String(!prime));
+      document.getElementById("cabecalho").classList.toggle("modo-hub", !prime);
+      document.getElementById("titulo-marca").innerHTML = prime
+        ? "MASTER PRIME"
+        : 'MASTER <span class="hub-amarelo">HUB</span>';
+      document.getElementById("Master").classList.toggle("ativa", prime);
+      document.getElementById("HUB").classList.toggle("ativa", !prime);
+      document.getElementById("Master").hidden = !prime;
+      document.getElementById("HUB").hidden = prime;
+    }
+
+    const consultores = Array.from(document.querySelectorAll(".consultor"));
+    let consultorAtual = Math.floor(Math.random() * consultores.length);
+
+    function atualizarCarrossel() {
+      const total = consultores.length;
+      consultores.forEach((consultor, i) => {
+        const distancia = (i - consultorAtual + total) % total;
+        consultor.classList.remove("ativo", "esquerda", "direita");
+        if (distancia === 0) consultor.classList.add("ativo");
+        if (distancia === 1) consultor.classList.add("direita");
+        if (distancia === total - 1) consultor.classList.add("esquerda");
+        const visivel = distancia === 0 || distancia === 1 || distancia === total - 1;
+        consultor.tabIndex = visivel ? 0 : -1;
+        consultor.setAttribute("aria-pressed", String(distancia === 0));
+      });
+
+      const selecionado = consultores[consultorAtual];
+      document.getElementById("nomeConsultor").textContent = selecionado.dataset.nome;
+      document.getElementById("cargoConsultor").textContent = selecionado.dataset.cargo;
+      document.getElementById("textoConsultor").textContent = selecionado.dataset.descricao;
+      document.getElementById("indicador").textContent = `${consultorAtual + 1} / ${total}`;
+
+      const botao = document.getElementById("whatsappConsultor");
+      const numero = (selecionado.dataset.whatsapp || "").replace(/\D/g, "");
+      botao.hidden = !numero;
+      if (numero) {
+        const mensagem = encodeURIComponent(`Olá! Gostaria de falar com ${selecionado.dataset.nome} sobre consórcios.`);
+        botao.href = `https://wa.me/${numero}?text=${mensagem}`;
+      } else {
+        botao.removeAttribute("href");
+      }
+    }
+
+    function mudarConsultor(direcao) {
+      consultorAtual = (consultorAtual + direcao + consultores.length) % consultores.length;
+      atualizarCarrossel();
+    }
+
+    consultores.forEach((consultor, indice) => {
+      consultor.addEventListener("click", () => {
+        consultorAtual = indice;
+        atualizarCarrossel();
+      });
+    });
+
+    document.getElementById("carrossel").addEventListener("keydown", event => {
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        mudarConsultor(event.key === "ArrowRight" ? 1 : -1);
+        consultores[consultorAtual].focus();
+      }
+    });
+
+    atualizarCarrossel();
+  </script>
+</body>
+</html>
