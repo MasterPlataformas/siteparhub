@@ -16,15 +16,15 @@
   /* CABEÇALHO: letras, logo e espessura da faixa. Valores menores deixam tudo menor. */
   --fundo-cabecalho-vidro: rgba(255, 255, 255, .78); /* .78 = 78% opaco. */
   --desfoque-cabecalho: 20px;
-  --fonte-menu: 19px;
-  --fonte-menu-celular: 13.68px;
-  --altura-menu: 22.8px;
-  --tamanho-logo-menu: 33.44px;
-  --espaco-vertical-menu: 12.16px; /* Espessura da faixa da página inicial. */
-  --espaco-vertical-menu-celular: 9.12px;
-  --espaco-vertical-menu-interno: 15.2px; /* Faixa das páginas internas e HUB. */
-  --fonte-menu-interno: 13.68px;
-  --fonte-menu-interno-celular: 12.16px;
+  --fonte-menu: 15.2px;
+  --fonte-menu-celular: 10.944px;
+  --altura-menu: 18.24px;
+  --tamanho-logo-menu: 26.752px;
+  --espaco-vertical-menu: 9.728px; /* Espessura da faixa da página inicial. */
+  --espaco-vertical-menu-celular: 7.296px;
+  --espaco-vertical-menu-interno: 12.16px; /* Faixa das páginas internas e HUB. */
+  --fonte-menu-interno: 10.944px;
+  --fonte-menu-interno-celular: 9.728px;
 
   /* Gavetas: altura mínima; o painel cresce com os links até o limite da tela. */
   --altura-gaveta: 75px;
