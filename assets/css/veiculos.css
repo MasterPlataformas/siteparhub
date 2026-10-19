@@ -6,9 +6,10 @@
   --recuo-logo-veiculo: 2%;
 }
 .vitrine-veiculos { position: relative; isolation: isolate; background: radial-gradient(ellipse at 50% 85%, #202020 0, #080808 38%, #000 72%); color: #fff; height: clamp(620px, 46vw, 780px); margin-bottom: 140px; }
-.vitrine-chamada { position: absolute; z-index: 4; top: 32px; left: 5.5%; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+.vitrine-chamada { position: absolute; z-index: 4; top: 32px; left: 5.5%; display: flex; flex-direction: column; align-items: flex-start; gap: 48px; }
 .vitrine-assinatura { margin: 0; font-size: clamp(18px, 1.65vw, 28px); font-weight: bold; letter-spacing: .04em; }
-.vitrine-contato { text-align: center; border: 1px solid #ffffffa0; border-radius: 999px; padding: 11px 30px; color: #fff; text-decoration: none; font-size: clamp(18px, 1.85vw, 28px); transition: background .2s, color .2s; }
+/* Compensa o espaço interno do botão para alinhar o texto com MASTER PRIME. */
+.vitrine-contato { margin-left: -31px; text-align: center; border: 1px solid #ffffffa0; border-radius: 999px; padding: 11px 30px; color: #fff; text-decoration: none; font-size: clamp(18px, 1.85vw, 28px); transition: background .2s, color .2s; }
 .vitrine-contato:hover { background: #fff; color: #000; }
 .vitrine-contato:focus-visible { outline: 3px solid #f5cc42; outline-offset: 5px; }
 .vitrine-titulo { position: absolute; z-index: 0; top: 40px; right: 7%; max-width: 78%; margin: 0; text-align: right; line-height: .86; font-weight: bold; }
@@ -38,7 +39,7 @@
 @media (max-width: 700px) {
   .vitrine-veiculos { height: 560px; margin-bottom: 120px; }
   .vitrine-chamada { top: 24px; gap: 18px; }
-  .vitrine-contato { padding: 9px 20px; font-size: 18px; }
+  .vitrine-contato { margin-left: -21px; padding: 9px 20px; font-size: 18px; }
   .vitrine-titulo { top: 148px; right: 6%; max-width: 90%; }
   .vitrine-modelo { font-size: clamp(45px, 12.5vw, 86px); }
   .vitrine-logo { top: calc(156px + clamp(45px, 12.5vw, 86px) * .86); width: min(calc(105px * var(--escala-logo-veiculo)), 35%); height: min(calc(60px * var(--escala-logo-veiculo)), 110px); }
