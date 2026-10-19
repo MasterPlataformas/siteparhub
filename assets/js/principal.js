@@ -122,23 +122,63 @@ document.getElementById("carrossel").addEventListener("keydown", event => {
 });
 
 // Caralho, um menu aberto por vez pra não virar bagunça
-const menus = document.querySelectorAll(".barra-superior details");
+const barra = document.querySelector(".barra-superior");
+const menus = Array.from(barra.querySelectorAll("details"));
+const fundoMenu = document.querySelector(".fundo-menu");
+const conteudos = [document.querySelector("main"), document.querySelector("footer")];
+
+function atualizarFundoMenu() {
+  const aberto = menus.some(menu => menu.open);
+  if (fundoMenu) fundoMenu.hidden = !aberto;
+  conteudos.forEach(conteudo => { conteudo.inert = aberto; });
+}
+
+function fecharMenus() {
+  menus.forEach(menu => { menu.open = false; });
+  atualizarFundoMenu();
+}
+
 menus.forEach(menu => {
+  const resumo = menu.querySelector("summary");
+  resumo.addEventListener("click", event => {
+    event.preventDefault();
+    const abrir = !menu.open;
+    fecharMenus();
+    menu.open = abrir;
+    atualizarFundoMenu();
+  });
   menu.addEventListener("toggle", () => {
-    if (menu.open) menus.forEach(outro => { if (outro !== menu) outro.open = false; });
+    atualizarFundoMenu();
+  });
+  menu.addEventListener("click", event => {
+    if (event.target.closest("a")) fecharMenus();
   });
 });
+
 document.addEventListener("click", event => {
-  menus.forEach(menu => { if (!menu.contains(event.target)) menu.open = false; });
+  if (!barra.contains(event.target)) fecharMenus();
 });
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape") menus.forEach(menu => {
-    if (menu.open) { menu.open = false; menu.querySelector("summary").focus(); }
-  });
+  if (event.key === "Escape") {
+    const aberto = menus.find(menu => menu.open);
+    fecharMenus();
+    aberto?.querySelector("summary").focus();
+  }
 });
-document.querySelector(".menu-painel").addEventListener("click", event => {
-  if (event.target.closest("a, button")) document.querySelector(".menu-sobre").open = false;
+barra.addEventListener("focusout", () => {
+  setTimeout(() => {
+    if (!barra.contains(document.activeElement)) fecharMenus();
+  }, 0);
 });
+
+// A barra muda de altura no celular, o painel precisa acompanhar
+function atualizarTopoGaveta() {
+  document.documentElement.style.setProperty("--topo-gaveta", barra.getBoundingClientRect().bottom + "px");
+}
+new ResizeObserver(atualizarTopoGaveta).observe(barra);
+window.addEventListener("resize", atualizarTopoGaveta);
+atualizarTopoGaveta();
+
 // A busca usa os nomes que cadastrei nas fotos
 document.getElementById("busca-consultor").addEventListener("submit", event => {
   event.preventDefault();
@@ -148,7 +188,7 @@ document.getElementById("busca-consultor").addEventListener("submit", event => {
   if (indice >= 0) {
     consultorAtual = indice;
     atualizarCarrossel();
-    document.querySelector(".busca-menu").open = false;
+    fecharMenus();
     document.getElementById("consultores").scrollIntoView();
     consultores[indice].focus({ preventScroll: true });
   }

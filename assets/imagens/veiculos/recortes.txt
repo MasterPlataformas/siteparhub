@@ -1,0 +1,9 @@
+Recortes feitos com a ferramenta integrada image_gen (fundo transparente).
+Arquivos únicos: haval-h6.png, byd-dolphin.png, corolla.png, hilux.png, toyota-logo.png, byd-logo.png.
+Prompt base aplicado individualmente às seis imagens:
+Use case: background-extraction. Edit only this image: remove all studio background and floor completely, output actual transparent alpha PNG. Preserve the exact car, all wheels, original viewing angle, colors, badges and proportions (for logos: brand logo, exact lettering, shapes and original colors). Do not redraw, redesign, add text or objects. Center the complete subject with a small transparent margin.
+Haval, correção adicional:
+Remove the remaining grey halo/glow studio wall and floor surrounding the silver GWM Haval H6. Every pixel outside the exact silhouette of the car MUST have alpha zero. No smoky gradient, no shadow, no backdrop. Keep the same car, angle, color and complete wheels.
+Logo GWM enviada pelo usuário: gwm-logo-enviada.png. Ferramenta integrada image_gen, transparent_background=true. Prompt: Remove only the white background from this exact GWM brand logo. Keep the silver metallic oval emblem and exact red GWM wordmark unchanged, keep original proportions and colors, preserve enclosed transparent holes. Output actual alpha transparency everywhere outside logo. Tight centered composition with small transparent margin. Do not add, redraw or restyle anything.
+
+GWM monocromática: gwm-logo-transparente.png; image_gen com transparent_background=true. Prompt: Remove white rectangle completely. Output black GWM emblem and exact GWM letters on genuine transparent alpha background, including transparent holes within emblem. Preserve exact shape and proportions. No opaque background, glow or shadow.

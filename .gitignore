@@ -12,3 +12,6 @@ Desktop.ini
 node_modules/
 .codex/
 .agents/
+
+# Checkout do portal separado do repositório do site
+.integracoes/

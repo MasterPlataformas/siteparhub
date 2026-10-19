@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Codec Pro";
+  src: url("../fontes/Codec Pro Regular.ttf") format("truetype");
+  font-display: swap;
+}
+* { box-sizing: border-box; }
+body { margin: 0 var(--margem-pagina) var(--margem-pagina); background: var(--cor-branco); color: var(--cor-texto); font-family: "Codec Pro", Arial, sans-serif; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 5px; }
+.barra-pagina { position: sticky; top: 0; z-index: 20; background: var(--cor-branco); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--altura-menu); padding: 20px 6%; border-bottom: 1px solid #eee; }
+.barra-pagina img { display: block; width: var(--tamanho-logo-menu); height: var(--tamanho-logo-menu); }
+.barra-pagina > a:nth-child(2) { margin-left: auto; }
+.barra-pagina a { font-size: 18px; text-decoration: none; }
+.conteudo-pagina { position: relative; max-width: var(--largura-equipe); min-height: calc(100svh - var(--altura-menu) - var(--margem-pagina)); margin: auto; padding: 100px 24px 60px; }
+.categoria-pagina { color: #666; font-size: 18px; }
+h1 { margin: 20px 0 30px; font-size: clamp(32px, 5vw, 64px); }
+p { font-size: 20px; line-height: 1.6; }
+.barra-pagina .botao-pagina { position: static; flex-shrink: 0; margin-left: auto; line-height: 1; white-space: nowrap; padding: var(--espaco-botao-vertical) var(--espaco-botao-horizontal); border-radius: var(--borda-botao-pagina); background: var(--cor-preto); color: var(--cor-branco); font-size: var(--fonte-botao-pagina); font-weight: bold; text-decoration: none; }
+.botao-pagina span { color: var(--cor-destaque); }
+.botao-pagina:hover { background: var(--cor-hover); }
+.indice-duvidas { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-bottom: 50px; font-size: 18px; }
+.grupo-duvidas { padding: 20px 0; }
+.grupo-duvidas h2 { font-size: 30px; }
+.grupo-duvidas article { padding: 20px 0; border-bottom: 1px solid #eee; scroll-margin-top: 24px; }
+.grupo-duvidas h3 { margin: 0; font-size: 24px; }
+.calendario-compartilhado { display: block; width: 100%; height: 1050px; margin-top: 20px; border: 0; }
+.calendario-link { font-size: 16px; }
+
+@media (max-width: 600px) {
+  .barra-pagina { gap: 12px; padding: 16px; }
+  .barra-pagina > a:nth-child(2) { max-width: 145px; font-size: 16px; }
+}

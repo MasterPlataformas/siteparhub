@@ -2,6 +2,7 @@
    Tamanhos usam px Nas cores, posso colocar um código como #111111
    Para deixar a logo mais forte, aumento a opacidade (de 0 a 1) */
 :root {
+  --margem-pagina: 20px;
   /* Cores que mais uso no site */
   --cor-texto: #111;
   --cor-branco: #fff;
@@ -13,16 +14,21 @@
   --cor-degrade: #f4f4f4;
 
   /* Barra de cima */
-  --fonte-menu: 22px;
+  --fonte-menu: 25px;
   --fonte-menu-celular: 18px;
-  --altura-menu: 84px;
+  --altura-menu: 30px;
   --tamanho-logo-menu: 44px;
 
+  /* Gavetas: altura mínima; o painel cresce com os links até o limite da tela. */
+  --altura-gaveta: 75px;
+  --fonte-link-gaveta: clamp(24px, 2.4vw, 38px);
+  --fonte-secundaria-gaveta: 22px;
+
   /* Tamanho das fotos, mexer aqui se ficar grande pra caralho */
-  --largura-equipe: 1080px;
-  --altura-carrossel: 520px;
-  --largura-foto: 420px;
-  --altura-foto: 510px;
+  --largura-equipe: 1280px;
+  --altura-carrossel: clamp(380px, 27.5vw, 520px);
+  --largura-foto: clamp(330px, 25vw, 470px);
+  --altura-foto: var(--altura-carrossel);
   --deslocamento-foto-anterior: -145px;
   --desfoque-foto-anterior: 3px;
   --opacidade-foto-anterior: .35;
@@ -30,9 +36,9 @@
   --fonte-descricao: clamp(20px, 2.5vw, 28px);
 
   /* Logo grande e apagada no fundo */
-  --tamanho-logo-fundo: 490px;
-  --desfoque-logo-fundo: 5px;
-  --opacidade-logo-fundo: .15;
+  --tamanho-logo-fundo: clamp(560px, 56.25vw, 1080px);
+  --desfoque-logo-fundo: 100px;
+  --opacidade-logo-fundo: .18;
 
   /* Botões entre Prime e HUB */
   --fonte-botao-pagina: 16px;
@@ -43,7 +49,7 @@
   /* Vídeos e título principal */
   --altura-video: clamp(350px, 55vw, 540px);
   --altura-video-apresentacao: 420px;
-  --fonte-titulo-prime: clamp(52px, 7.5vw, 88px);
+  --fonte-titulo-prime: clamp(60px, 8vw, 150px);
   --fonte-titulo-hub: clamp(48px, 10vw, 110px);
 }
 
@@ -64,6 +70,6 @@
     --largura-foto: 290px;
     --altura-foto: 370px;
     --deslocamento-foto-anterior: -75px;
-    --tamanho-logo-fundo: 360px;
+    --tamanho-logo-fundo: 560px;
   }
 }

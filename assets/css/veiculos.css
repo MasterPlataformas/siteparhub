@@ -1,0 +1,50 @@
+/* AJUSTES DA LOGO: escala 1 = original; 1.2 = 20% maior.
+   Recuo 2% aproxima a logo da borda direita; aumente para afastar.
+   O tamanho máximo evita cobrir todo o banner. */
+:root {
+  --escala-logo-veiculo: 4.0;
+  --recuo-logo-veiculo: 2%;
+}
+.vitrine-veiculos { position: relative; isolation: isolate; background: radial-gradient(ellipse at 50% 85%, #202020 0, #080808 38%, #000 72%); color: #fff; height: clamp(620px, 46vw, 780px); margin-bottom: 140px; }
+.vitrine-assinatura { position: absolute; z-index: 4; top: 32px; left: 5.5%; margin: 0; font-size: clamp(18px, 1.65vw, 28px); font-weight: bold; letter-spacing: .04em; }
+.vitrine-contato { position: absolute; z-index: 4; top: 112px; left: 5.5%; border: 1px solid #ffffffa0; border-radius: 999px; padding: 11px 30px; color: #fff; text-decoration: none; font-size: clamp(18px, 1.85vw, 28px); transition: background .2s, color .2s; }
+.vitrine-contato:hover { background: #fff; color: #000; }
+.vitrine-contato:focus-visible { outline: 3px solid #f5cc42; outline-offset: 5px; }
+.vitrine-titulo { position: absolute; z-index: 0; top: 40px; right: 7%; max-width: 78%; margin: 0; text-align: right; line-height: .86; font-weight: bold; }
+.vitrine-modelo { display: block; font-size: clamp(70px, 11.5vw, 184px); letter-spacing: -.045em; }
+.vitrine-marca { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* Logo da marca alinhada à direita. */
+.vitrine-logo {
+  position: absolute;
+  z-index: 3;
+  top: calc(52px + clamp(70px, 11.5vw, 184px) * .86);
+  right: var(--recuo-logo-veiculo);
+  width: min(calc(clamp(120px, 12vw, 180px) * var(--escala-logo-veiculo)), 35%);
+  height: min(calc(95px * var(--escala-logo-veiculo)), 180px);
+  object-fit: contain;
+  object-position: right top;
+  filter: brightness(0) invert(1);
+}
+.vitrine-foto { position: absolute; z-index: 2; left: 1%; bottom: -95px; width: 98%; height: 105%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 24px 15px #0006); pointer-events: none; }
+.vitrine-rodape { position: absolute; z-index: 1; top: 100%; min-height: 140px; padding: 65px 20px 15px; background: #fff; width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; color: #000; font-size: clamp(24px, 3.2vw, 50px); font-weight: bold; letter-spacing: -.02em; }
+.vitrine-rodape img { width: 52px; height: 52px; object-fit: contain; }
+@media (min-width: 701px) and (max-width: 1100px) {
+  .vitrine-titulo { top: 65px; }
+  .vitrine-modelo { font-size: 14.0vw; }
+  .vitrine-foto { bottom: -65px; height: 92%; }
+  .vitrine-logo { top: calc(77px + 14vw * .86); }
+}
+@media (max-width: 700px) {
+  .vitrine-veiculos { height: 560px; margin-bottom: 120px; }
+  .vitrine-assinatura { top: 24px; }
+  .vitrine-contato { top: 64px; padding: 9px 20px; font-size: 18px; }
+  .vitrine-titulo { top: 148px; right: 6%; max-width: 90%; }
+  .vitrine-modelo { font-size: clamp(45px, 12.5vw, 86px); }
+  .vitrine-logo { top: calc(156px + clamp(45px, 12.5vw, 86px) * .86); width: min(calc(105px * var(--escala-logo-veiculo)), 35%); height: min(calc(60px * var(--escala-logo-veiculo)), 110px); }
+  .vitrine-foto { left: -3%; width: 106%; max-width: none; height: 72%; bottom: -90px; }
+  .vitrine-rodape { min-height: 110px; padding-top: 44px; font-size: clamp(23px, 6.2vw, 34px); }
+  .vitrine-rodape img { width: 40px; height: 40px; }
+}
+/* Cores originais para as marcas configuradas no cadastro. */
+.vitrine-logo-colorida { filter: none; }
+

@@ -1,5 +1,22 @@
 # Minhas anotações do site
 
+## Calendário de assembleias
+
+O tópico Assembleias em `paginas/duvidas.html` mostra o calendário compartilhado do portal
+As regras ficam em `.integracoes/masterprime-portal/calendario.js`, não no JavaScript do site
+Para publicar e manter essa integração, sigo `docs/CALENDARIO-COMPARTILHADO.md`
+
+## Páginas das gavetas
+
+Os itens principais abrem os arquivos da pasta `paginas/` em novas abas
+Cada página tem só título e `------------escrita` para eu preencher depois
+O visual delas fica em `assets/css/paginas.css`, usando as cores de `assets/css/personalizar.css`
+
+As chamadas menores vão para `paginas/duvidas.html`, cada uma no seu tópico
+O `#` no final do link indica o `id` do tópico dentro dessa mesma página
+
+Na `index.html` deixei só os resumos, sem repetir todos os detalhes
+
 ## Visual
 
 As cores e os tamanhos principais ficam em `assets/css/personalizar.css`. As duas páginas usam esse arquivo.
@@ -45,3 +62,18 @@ Os vídeos `masterprime.mp4` e `apresentacao-master.mp4` ainda precisam ser colo
 Alguns links do menu ainda apontam para trechos provisórios. Vou ajustar quando criar essas seções.
 
 Depois de salvar, atualizo o navegador com Ctrl + F5.
+
+## Adicionar carros ao banner
+
+Edite somente `assets/js/cadastro-veiculos.js`. Ele contém um exemplo comentado pronto para copiar.
+
+1. Salve a foto do carro e a logo, em PNG sem fundo, em `assets/imagens/veiculos/`.
+2. Copie um cadastro dentro de `listaVeiculos`, antes do `];` final.
+3. Preencha `nome`, `marca`, `texto`, `foto`, `logo` e `logoColorida`.
+4. Em `foto` e `logo`, informe apenas o nome do arquivo, incluindo `.png`.
+5. Mantenha uma vírgula depois de cada bloco, salve e atualize com Ctrl + F5.
+
+`texto` é a frase abaixo do nome: por exemplo, `0KM`, `HÍBRIDO` ou `ELÉTRICO`.
+`logoColorida: true` preserva as cores da logo. `false` deixa a logo branca sobre o banner preto.
+`intervaloVeiculos = 3000` controla a troca a cada 3 segundos.
+Não é necessário alterar HTML, CSS ou a lógica do sorteio para cadastrar outro carro.
