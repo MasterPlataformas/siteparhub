@@ -14,6 +14,8 @@
   --cor-degrade: #f4f4f4;
 
   /* CABEÇALHO: letras, logo e espessura da faixa. Valores menores deixam tudo menor. */
+  --fundo-cabecalho-vidro: rgba(255, 255, 255, .78); /* .78 = 78% opaco. */
+  --desfoque-cabecalho: 20px;
   --fonte-menu: 19px;
   --fonte-menu-celular: 13.68px;
   --altura-menu: 22.8px;
@@ -76,5 +78,32 @@
     --altura-foto: 370px;
     --deslocamento-foto-anterior: -75px;
     --tamanho-logo-fundo: 560px;
+  }
+}
+
+/* Cabeçalhos com efeito de vidro. Fundo mais sólido em navegadores sem desfoque. */
+body .barra-superior,
+body .barra-pagina,
+body .barra-hub {
+  background: rgba(255, 255, 255, .94);
+  border-bottom: 1px solid rgba(0, 0, 0, .07);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, .025);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  body .barra-superior,
+  body .barra-pagina,
+  body .barra-hub {
+    background: var(--fundo-cabecalho-vidro);
+    backdrop-filter: saturate(180%) blur(var(--desfoque-cabecalho));
+    -webkit-backdrop-filter: saturate(180%) blur(var(--desfoque-cabecalho));
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  body .barra-superior,
+  body .barra-pagina,
+  body .barra-hub {
+    background: var(--cor-branco);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
