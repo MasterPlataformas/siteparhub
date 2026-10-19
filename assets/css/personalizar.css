@@ -2,7 +2,7 @@
    Tamanhos usam px Nas cores, posso colocar um código como #111111
    Para deixar a logo mais forte, aumento a opacidade (de 0 a 1) */
 :root {
-  --margem-pagina: 20px;
+  --margem-pagina: 0px;
   /* Cores que mais uso no site */
   --cor-texto: #111;
   --cor-branco: #fff;
@@ -13,11 +13,16 @@
   --cor-hover: #333;
   --cor-degrade: #f4f4f4;
 
-  /* Barra de cima */
-  --fonte-menu: 25px;
-  --fonte-menu-celular: 18px;
-  --altura-menu: 30px;
-  --tamanho-logo-menu: 44px;
+  /* CABEÇALHO: letras, logo e espessura da faixa. Valores menores deixam tudo menor. */
+  --fonte-menu: 19px;
+  --fonte-menu-celular: 13.68px;
+  --altura-menu: 22.8px;
+  --tamanho-logo-menu: 33.44px;
+  --espaco-vertical-menu: 12.16px; /* Espessura da faixa da página inicial. */
+  --espaco-vertical-menu-celular: 9.12px;
+  --espaco-vertical-menu-interno: 15.2px; /* Faixa das páginas internas e HUB. */
+  --fonte-menu-interno: 13.68px;
+  --fonte-menu-interno-celular: 12.16px;
 
   /* Gavetas: altura mínima; o painel cresce com os links até o limite da tela. */
   --altura-gaveta: 75px;

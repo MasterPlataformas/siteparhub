@@ -7,10 +7,10 @@
 body { margin: 0 var(--margem-pagina) var(--margem-pagina); background: var(--cor-branco); color: var(--cor-texto); font-family: "Codec Pro", Arial, sans-serif; }
 a { color: inherit; }
 a:focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 5px; }
-.barra-pagina { position: sticky; top: 0; z-index: 20; background: var(--cor-branco); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--altura-menu); padding: 20px 6%; border-bottom: 1px solid #eee; }
+.barra-pagina { position: sticky; top: 0; z-index: 20; background: var(--cor-branco); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--altura-menu); padding: var(--espaco-vertical-menu-interno) 6%; border-bottom: 1px solid #eee; }
 .barra-pagina img { display: block; width: var(--tamanho-logo-menu); height: var(--tamanho-logo-menu); }
 .barra-pagina > a:nth-child(2) { margin-left: auto; }
-.barra-pagina a { font-size: 18px; text-decoration: none; }
+.barra-pagina a { font-size: var(--fonte-menu-interno); text-decoration: none; }
 .conteudo-pagina { position: relative; max-width: var(--largura-equipe); min-height: calc(100svh - var(--altura-menu) - var(--margem-pagina)); margin: auto; padding: 100px 24px 60px; }
 .categoria-pagina { color: #666; font-size: 18px; }
 h1 { margin: 20px 0 30px; font-size: clamp(32px, 5vw, 64px); }
@@ -27,6 +27,6 @@ p { font-size: 20px; line-height: 1.6; }
 .calendario-link { font-size: 16px; }
 
 @media (max-width: 600px) {
-  .barra-pagina { gap: 12px; padding: 16px; }
-  .barra-pagina > a:nth-child(2) { max-width: 145px; font-size: 16px; }
+  .barra-pagina { gap: 9.12px; padding: 12.16px; }
+  .barra-pagina > a:nth-child(2) { max-width: 145px; font-size: var(--fonte-menu-interno-celular); }
 }
