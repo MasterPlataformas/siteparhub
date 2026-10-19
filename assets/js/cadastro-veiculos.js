@@ -5,7 +5,7 @@
 // Use apenas o nome do arquivo em foto e logo, sem o caminho da pasta.
 // O nome, o texto e a logo trocam automaticamente junto com o carro.
 
-const intervaloVeiculos = 1000; //  (3000 = 3 segundos).
+const intervaloVeiculos = 5000; //  (3000 = 3 segundos).
 
 const listaVeiculos = [
   {
