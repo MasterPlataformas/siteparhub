@@ -91,8 +91,10 @@
   z-index: 2;
   justify-self: center;
   display: block;
-  width: 100%;
-  max-width: 1440px;
+  width: 95%; /* Tamanho do carro: */
+  max-width: 800px;
+  scale: .95; /* Diminui somente a imagem do carro em 15%. */
+  transform-origin: center bottom;
   height: auto;
   aspect-ratio: 16 / 9;
   margin-top: clamp(-350px, -23vw, -160px);
